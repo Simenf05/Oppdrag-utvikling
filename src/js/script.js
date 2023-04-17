@@ -53,6 +53,8 @@ function changePosition() {
             return
         }
 
+        console.log(e.target)
+
         const xy = htmlElementData.position
 
         xy[0] = e.clientX
