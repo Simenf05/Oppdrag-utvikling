@@ -21,6 +21,7 @@
 
         <label for="typeHtmlElement">Velg type html element her: </label>
         <select id="typeHtmlElement">
+            <option selected disabled hidden>Velg her</option>
             <option>p</option>
             <option>h1</option>
             <option>div</option>
@@ -29,11 +30,14 @@
         <br>
 
         <label for="innerHtmlChanger">Skriv hva som skal stå der her: </label>
-        <input type="text" id="innerHtmlChanger">
+        <input disabled type="text" id="innerHtmlChanger">
 
-        <button id="htmlPosition">Position</button>
+        <br>
 
+        <button disabled id="htmlPosition">Position</button>
+        <p id="positionText"></p>
 
+        <button disabled id="htmlSubmit">Submit</button>
     </div>
 
     <script src="js/script.js"></script>
