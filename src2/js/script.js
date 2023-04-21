@@ -8,14 +8,12 @@ const htmlSubmitEl = document.getElementById("htmlSubmit")
 const htmlElementData = {
     elementType: null,
     innerText: null,
-    position: [null, null]
+    target: null
 }
 
-/** Does the setup for the html site.*/
 function setUp() {
 
     backgroundInpEl.onchange = e => document.body.style.backgroundColor = e.target.value
-
     htmlTypeEl.onchange = htmlTypeChange
     innerHtmlEl.onchange = htmlInnerTextChanger
     positionHtmlEl.onclick = changePosition
@@ -23,13 +21,12 @@ function setUp() {
 
 }
 
-/** Changes the type of the element that will be created.*/
+
 function htmlTypeChange(e) {
     htmlElementData.elementType = e.target.value
     innerHtmlEl.disabled = false
 }
 
-/** Changes the inner text of the element.*/
 function htmlInnerTextChanger(e) {
     const text = e.target.value
 
@@ -42,11 +39,9 @@ function htmlInnerTextChanger(e) {
     positionHtmlEl.disabled = false
 }
 
-/** Creates onclick for the document to register the next click.
- * The firstClick makes sure that the click event currently happening will not register as click.*/
 function changePosition() {
-    positionTextEl.innerHTML = "click somewhere"
-    htmlElementData.position = [null, null]
+    positionTextEl.innerHTML = "Click somewhere"
+    htmlElementData.target = null
     htmlSubmitEl.disabled = true
 
     let firstClick = true
@@ -58,29 +53,23 @@ function changePosition() {
             return
         }
 
-        const xy = htmlElementData.position
+        htmlElementData.target = e.target
 
-        xy[0] = e.clientX
-        xy[1] = e.clientY
-
-        positionTextEl.innerHTML = `(${xy.toString()})`
+        positionTextEl.innerHTML = `Element selected`
         document.onclick = null
         htmlSubmitEl.disabled = false
     }
 }
 
-/** Adds the element and configures it.*/
-function submit(e) {
+function submit() {
 
     const newEl = document.createElement(htmlElementData.elementType)
 
     newEl.innerHTML = htmlElementData.innerText
 
-    newEl.style.position = "absolute"
-    newEl.style.left = htmlElementData.position[0]
-    newEl.style.top = htmlElementData.position[1]
+    console.log(htmlElementData.target)
 
-    document.body.appendChild(newEl)
+    htmlElementData.target.appendChild(newEl)
 }
 
 setUp()
